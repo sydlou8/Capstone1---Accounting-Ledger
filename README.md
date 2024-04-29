@@ -32,7 +32,14 @@
 > - Amount
 >
 (insert image of UML Diagram)
+
+---
+
 ### IO Usage
+There are a lot of I/O usage -- 
+- used a lot of userInput using scanner
+- usage of PrintWriter and FileWriter to create a new csv file
+- usage of Scanner to read csv lines and place it into the Transactions ArrayList
 ### Class Usage
 I wanted to keep things organized. Even though we are storing all of our information into a log file, 
 I wanted to make it easier for myself later on... I wouldn't need to constantly open and close a file
@@ -50,7 +57,7 @@ for easier filtering and searching! For example:
 ```
 This basically filters the Transactions to only show those that are Payments (negative) 
 ### Exception Handling
-
+I used the try/catch statement to handle any File Exceptions and if something wasn't a correct data type.
 ## Transaction Class
 ### Private Variables
 ```java
@@ -83,3 +90,13 @@ especially when filtering.
         System.out.println(output);
     }
 ```
+## Report Screen Logic
+### MTD
+This is the total money from the first day of the current _MONTH_ to the current day.
+For this, I will be using a 
+### Last Month
+I am assuming this is last month's total.
+### YTD
+This is the total money from the first day of the current _YEAR_ to the current day.
+### Last Year
+I am assuming this is last year's total.
