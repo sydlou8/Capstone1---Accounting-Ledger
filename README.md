@@ -58,6 +58,8 @@ for easier filtering and searching! For example:
 This basically filters the Transactions to only show those that are Payments (negative) 
 ### Exception Handling
 I used the try/catch statement to handle any File Exceptions and if something wasn't a correct data type.
+### LocalDateTime
+This was used to log the current time and date of the transaction. Will be used in later Reports.
 ## Transaction Class
 ### Private Variables
 ```java
@@ -93,7 +95,8 @@ especially when filtering.
 ## Report Screen Logic
 ### MTD
 This is the total money from the first day of the current _MONTH_ to the current day.
-For this, I will be using a 
+For this, I will be using the LocalDateTime to filter the transaction description and then get the 
+amounts to add together for an MTD Gross Total.
 ### Last Month
 I am assuming this is last month's total.
 ### YTD
