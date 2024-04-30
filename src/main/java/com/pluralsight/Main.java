@@ -4,7 +4,9 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     private static ArrayList<Transaction> transactions = new ArrayList<>();
@@ -185,6 +187,8 @@ public class Main {
                         searchVendor();
                         break;
                     case 6:
+                        System.out.println("-".repeat(60));
+                        customSearch();
                         break;
                     case 0:
                         getLedger();
@@ -262,7 +266,40 @@ public class Main {
                 .filter(transaction -> transaction.getVendor().equalsIgnoreCase(input))
                 .forEach(Transaction::display);
     }
+    private static void customSearch() {
+        final String SOD = " 00:00:00";
+        final String EOD = " 23:59:59";
+        System.out.println("Please enter information for search or hit [ENTER] to skip: ");
 
+        System.out.print("Please enter start date (format: yyyy-MM-dd): ");
+        String start = userInput.nextLine().strip();
+        System.out.print("Please enter end date (format: yyyy-MM-dd): ");
+        String end = userInput.nextLine().strip();
+        System.out.print("Please enter description of transaction: ");
+        String description = userInput.nextLine().strip();
+        System.out.print("Please enter transaction vendor: ");
+        String vendor = userInput.nextLine().strip();
+        System.out.print("Please enter amount debited/deposited: ");
+        String amount = userInput.nextLine().strip();
+
+        // Collect filtered transactions based on user input
+        ArrayList<Transaction> filteredTransactions = new ArrayList<>();
+
+        transactions.stream()
+                .filter(transaction -> (start.isEmpty() || transaction.getDate().isAfter(LocalDateTime.parse(start + SOD, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).minusDays(1))))
+                .filter(transaction -> (end.isEmpty() || transaction.getDate().isBefore(LocalDateTime.parse(end + EOD, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).plusDays(1))))
+                .filter(transaction -> (description.isEmpty() || transaction.getDescription().equalsIgnoreCase(description)))
+                .filter(transaction -> (vendor.isEmpty() || transaction.getVendor().equalsIgnoreCase(vendor)))
+                .filter(transaction -> (amount.isEmpty() || transaction.getAmount() == Double.parseDouble(amount)))
+                .forEach(filteredTransactions::add);
+
+        if (filteredTransactions.isEmpty()) {
+            System.out.println("No Available transactions");
+        } else {
+            System.out.println("Filtered Transactions:");
+            filteredTransactions.forEach(Transaction::display);
+        }
+    }
     // REPORT METHODS
     private static double monthToDate(LocalDateTime today) {
         return transactions.stream()
