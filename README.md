@@ -1,10 +1,10 @@
 # Capstone 1 - Accounting Ledger 
 # LOG
-##### April 25:
+##### [April 25:](#april-25-1)
 I am currently coding this project in a very basic way. The project feels very clunky at the moment.
 After figuring out all my main code, I plan on updating my code to be more organized. I want to challenge myself
 using an MVC architecture -- which Gregor vaguely introduced a while ago.
-##### April 26:
+##### [April 26:](#april-26---new-structure)
 I wasn't able to do a MVC architecture, but I was able to organize everything in a new way
 ![UML Diagram](files/UML.png)
 
