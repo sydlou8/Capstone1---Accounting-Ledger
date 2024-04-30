@@ -1,6 +1,9 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     private String currentDate;
@@ -56,9 +59,16 @@ public class Transaction {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-    public void display(){
+
+
+    public void display() {
         String output = String.format("%s\t%s\t%s\t%s\t$%4.2f",
                 currentDate,currentTime, description, vendor, amount);
         System.out.println(output);
+    }
+    public LocalDateTime getDate() {
+        String currentDateTime = String.format("%s %s", currentDate, currentTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.parse(currentDateTime, formatter);
     }
 }

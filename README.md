@@ -103,3 +103,9 @@ I am assuming this is last month's total.
 This is the total money from the first day of the current _YEAR_ to the current day.
 ### Last Year
 I am assuming this is last year's total.
+
+# LOG
+##### April 25:
+I am currently coding this project in a very basic way. The project feels very clunky at the moment.
+After figuring out all my main code, I plan on updating my code to be more organized. I want to challenge myself
+using an MVC architecture -- which Gregor vaguely introduced a while ago.

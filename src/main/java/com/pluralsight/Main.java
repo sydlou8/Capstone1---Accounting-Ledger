@@ -15,6 +15,8 @@ public class Main {
         listFiller();
         getHomeScreen();
     }
+
+    // SCREENS
     private static void getHomeScreen (){
         String selection;
         System.out.println("=".repeat(60));
@@ -42,9 +44,7 @@ public class Main {
                     System.out.println("=".repeat(60));
                     break;
                 case "L":
-                    System.out.println("=".repeat(60));
-                    getLedgerScreen();
-                    System.out.println("=".repeat(60));
+                    getLedger();
                     break;
                 case "X":
                     System.out.println("-".repeat(60));
@@ -104,6 +104,101 @@ public class Main {
             }
         }
     }
+    private static void getLedger() {
+        String selection;
+        while(true) {
+            System.out.println("=".repeat(60));
+            System.out.println(" ".repeat(23) + "LEDGER SCREEN" + " ".repeat(25));
+            System.out.println("=".repeat(60));
+            System.out.println("Please make a selection: ");
+
+            System.out.println("\t[A] - Show All Transactions");
+            System.out.println("\t[D] - Show All Deposits");
+            System.out.println("\t[P] - Show All Payments");
+            System.out.println("\t[R] - Reports");
+            System.out.println("\t[H] - Home");
+            System.out.print("Your Selection: ");
+
+            selection = userInput.nextLine().strip().toUpperCase();
+            switch (selection){
+                case "A":
+                    System.out.println("-".repeat(60));
+                    displayAll();
+                    break;
+                case "D":
+                    System.out.println("-".repeat(60));
+                    displayDeposits();
+                    break;
+                case "P":
+                    System.out.println("-".repeat(60));
+                    displayPayments();
+                    break;
+                case "R":
+                    getReports();
+                    break;
+                case "H":
+                    getHomeScreen();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    private static void getReports() {
+        int selection;
+        while(true) {
+            LocalDateTime today = LocalDateTime.now();
+            System.out.println("=".repeat(60));
+            System.out.println(" ".repeat(23) + "REPORTS SCREEN" + " ".repeat(25));
+            System.out.println("=".repeat(60));
+            System.out.println("Please make a selection: ");
+
+            System.out.println("\t[1] - Month To Date");
+            System.out.println("\t[2] - Last Month");
+            System.out.println("\t[3] - Year To Date");
+            System.out.println("\t[4] - Last Year");
+            System.out.println("\t[5] - Search By Vendor");
+            System.out.println("\t[6] - Custom Search");
+            System.out.println("\t[0] - Back");
+            System.out.print("Your Selection: ");
+            try {
+                selection = Integer.parseInt(userInput.nextLine().strip());
+                switch(selection) {
+                    case 1:
+                        System.out.println("-".repeat(60));
+                        System.out.printf("MTD: $%5.2f\n", monthToDate(today));
+                        break;
+                    case 2:
+                        System.out.println("-".repeat(60));
+                        System.out.printf("Last Month: $%5.2f\n", lastMonth(today));
+                        break;
+                    case 3:
+                        System.out.println("-".repeat(60));
+                        System.out.printf("YTD: $%5.2f\n", yearToDate(today));
+                        break;
+                    case 4:
+                        System.out.println("-".repeat(60));
+                        System.out.printf("YTD: $%5.2f\n", lastYear(today));
+                        break;
+                    case 5:
+                        System.out.println("-".repeat(60));
+                        searchVendor();
+                        break;
+                    case 6:
+                        break;
+                    case 0:
+                        getLedger();
+                        break;
+                    default:
+                        System.out.print("Please enter a proper selection: ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: " + e);
+            }
+        }
+    }
+
+    // LOG HANDLING
     private static void listFiller() {
         final String LOG_DIRECTORY= "logs";
         File directory = new File(LOG_DIRECTORY);
@@ -141,55 +236,10 @@ public class Main {
             System.out.println("ERROR: " + e);
         }
     }
-    private static void getLedgerScreen() {
-        String selection;
-        while(true) {
-            System.out.println("=".repeat(60));
-            System.out.println(" ".repeat(23) + "LEDGER SCREEN" + " ".repeat(25));
-            System.out.println("=".repeat(60));
-            System.out.println("Please make a selection: ");
 
-            System.out.println("\t[A] - Show All Transactions");
-            System.out.println("\t[D] - Show All Deposits");
-            System.out.println("\t[P] - Show All Payments");
-            System.out.println("\t[R] - Reports");
-            System.out.println("\t[H] - Home");
-            System.out.print("Your Selection: ");
-
-            selection = userInput.nextLine().strip().toUpperCase();
-            switch (selection){
-                case "A":
-                    System.out.println("-".repeat(60));
-                    displayAll();
-                    System.out.println("-".repeat(60));
-                    break;
-                case "D":
-                    System.out.println("-".repeat(60));
-                    displayDeposits();
-                    System.out.println("-".repeat(60));
-                    break;
-                case "P":
-                    System.out.println("-".repeat(60));
-                    displayPayments();
-                    System.out.println("-".repeat(60));
-                    break;
-                case "R":
-                    getReports();
-                    break;
-                case "H":
-                    getHomeScreen();
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-    private static void getReports() {
-
-    }
+    // DISPLAY METHODS
     private static void displayAll () {
         transactions.forEach(Transaction::display);
-
     }
     private static void displayDeposits() {
         transactions.stream()
@@ -201,7 +251,51 @@ public class Main {
                 .filter(transaction -> transaction.getAmount() < 0)
                 .forEach(Transaction::display);
     }
-    private static void searchVendor() {
 
+    // SEARCH METHODS
+    private static void searchVendor() {
+        String input;
+        System.out.print("Please Enter Vendor: ");
+        input = userInput.nextLine().strip();
+        System.out.println("-".repeat(60));
+        transactions.stream()
+                .filter(transaction -> transaction.getVendor().equalsIgnoreCase(input))
+                .forEach(Transaction::display);
+    }
+
+    // REPORT METHODS
+    private static double monthToDate(LocalDateTime today) {
+        return transactions.stream()
+                .filter(transaction -> transaction.getDate().getYear() == today.getYear())
+                .filter(transaction -> transaction.getDate().getMonthValue() == today.getMonthValue())
+                .filter(transaction -> transaction.getDate().getDayOfMonth() <= today.getDayOfMonth())
+                .mapToDouble(Transaction::getAmount)
+                .sum();
+    }
+    private static double lastMonth(LocalDateTime today) {
+        return transactions.stream()
+                .filter(transaction -> transaction.getDate().getYear() == today.getYear())
+                .filter(transaction -> transaction.getDate().getMonthValue() == today.getMonthValue()-1)
+                .mapToDouble(Transaction::getAmount)
+                .sum();
+    }
+    private static double yearToDate(LocalDateTime today) {
+        // MTD + Beginning of Year to Before Current Month
+        return (transactions.stream()
+                .filter(transaction -> transaction.getDate().getYear() == today.getYear())
+                .filter(transaction -> transaction.getDate().getMonthValue() == today.getMonthValue())
+                .filter(transaction -> transaction.getDate().getDayOfMonth() <= today.getDayOfMonth())
+                .mapToDouble(Transaction::getAmount)
+                .sum()) + (transactions.stream()
+                .filter(transaction -> transaction.getDate().getYear() == today.getYear())
+                .filter(transaction -> transaction.getDate().getMonthValue() < today.getMonthValue())
+                .mapToDouble(Transaction::getAmount)
+                .sum()) ;
+    }
+    private static double lastYear(LocalDateTime today) {
+        return transactions.stream()
+                .filter(transaction -> transaction.getDate().getYear() == today.getYear()-1)
+                .mapToDouble(Transaction::getAmount)
+                .sum();
     }
 }
