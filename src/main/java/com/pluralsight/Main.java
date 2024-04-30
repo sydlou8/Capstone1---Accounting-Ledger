@@ -1,16 +1,18 @@
 package com.pluralsight;
 
-import java.io.*;
+/*import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.Scanner;*/
+
+import static com.pluralsight.TransactionList.listFiller;
+import static com.pluralsight.UserInterface.getHomeScreen;
+
 
 public class Main {
-    private static ArrayList<Transaction> transactions = new ArrayList<>();
-    private static Scanner userInput = new Scanner(System.in);
+    //private static ArrayList<Transaction> transactions = new ArrayList<>();
+    //private static Scanner userInput = new Scanner(System.in);
 
     public static void main(String[] args) {
         // listFiller() --> fills transactions ArrayList if transaction.csv is already filled also creates a directory if does not exist.
@@ -19,6 +21,7 @@ public class Main {
     }
 
     // SCREENS
+    /*
     private static void getHomeScreen (){
         String selection;
         System.out.println("=".repeat(60));
@@ -201,8 +204,10 @@ public class Main {
             }
         }
     }
+    */
 
-    // LOG HANDLING
+    // ******* WORK ON THIS STILL ***** LOG HANDLING ---> Move to TransactionList.java??
+    /*
     private static void listFiller() {
         final String LOG_DIRECTORY= "logs";
         File directory = new File(LOG_DIRECTORY);
@@ -225,9 +230,9 @@ public class Main {
         }
     }
     private static void logger(Transaction transaction) {
-       /* final String LOG_DIRECTORY= "logs";
-        File directory = new File(LOG_DIRECTORY);
-        if(!directory.exists()) directory.mkdir();*/
+        // final String LOG_DIRECTORY= "logs";
+        // File directory = new File(LOG_DIRECTORY);
+        // if(!directory.exists()) directory.mkdir();
         File file = new File("logs/transaction.csv");
         try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
             writer.printf("%s|%s|%s|%s|%4.2f\n",
@@ -240,8 +245,10 @@ public class Main {
             System.out.println("ERROR: " + e);
         }
     }
+    */
 
-    // DISPLAY METHODS
+    // DISPLAY METHODS ---> Moved to UserInterface.java AND TransactionList.java
+    /*
     private static void displayAll () {
         transactions.forEach(Transaction::display);
     }
@@ -255,8 +262,10 @@ public class Main {
                 .filter(transaction -> transaction.getAmount() < 0)
                 .forEach(Transaction::display);
     }
+    */
 
-    // SEARCH METHODS
+    // SEARCH METHODS ---> Moved to Reports.java AND TransactionList.java
+    /*
     private static void searchVendor() {
         String input;
         System.out.print("Please Enter Vendor: ");
@@ -300,7 +309,10 @@ public class Main {
             filteredTransactions.forEach(Transaction::display);
         }
     }
-    // REPORT METHODS
+     */
+
+    // REPORT METHODS ---> Moved to Reports.java
+    /*
     private static double monthToDate(LocalDateTime today) {
         return transactions.stream()
                 .filter(transaction -> transaction.getDate().getYear() == today.getYear())
@@ -335,4 +347,5 @@ public class Main {
                 .mapToDouble(Transaction::getAmount)
                 .sum();
     }
+     */
 }

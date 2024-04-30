@@ -1,5 +1,16 @@
 # Capstone 1 - Accounting Ledger 
+# LOG
+##### April 25:
+I am currently coding this project in a very basic way. The project feels very clunky at the moment.
+After figuring out all my main code, I plan on updating my code to be more organized. I want to challenge myself
+using an MVC architecture -- which Gregor vaguely introduced a while ago.
+##### April 26:
+I wasn't able to do a MVC architecture, but I was able to organize everything in a new way
+![UML Diagram](files/UML.png)
 
+---
+
+# April 25
 ## Main Class
 ### Screens
 > **Home Screen:**
@@ -31,7 +42,6 @@
 > - Vendor
 > - Amount
 >
-(insert image of UML Diagram)
 
 ---
 
@@ -53,7 +63,7 @@ for easier filtering and searching! For example:
     //... code that shows adds csv information into ArrayList ...
     transactions.stream()
         .filter(transaction -> transaction.getAmount > 0)
-        .forEatch(transaction -> System.out.println(transaction.getDescription()));
+        .forEach(transaction -> System.out.println(transaction.getDescription()));
 ```
 This basically filters the Transactions to only show those that are Payments (negative) 
 ### Exception Handling
@@ -92,20 +102,148 @@ especially when filtering.
         System.out.println(output);
     }
 ```
-## Report Screen Logic
-### MTD
-This is the total money from the first day of the current _MONTH_ to the current day.
-For this, I will be using the LocalDateTime to filter the transaction description and then get the 
-amounts to add together for an MTD Gross Total.
-### Last Month
-I am assuming this is last month's total.
-### YTD
-This is the total money from the first day of the current _YEAR_ to the current day.
-### Last Year
-I am assuming this is last year's total.
+---
 
-# LOG
-##### April 25:
-I am currently coding this project in a very basic way. The project feels very clunky at the moment.
-After figuring out all my main code, I plan on updating my code to be more organized. I want to challenge myself
-using an MVC architecture -- which Gregor vaguely introduced a while ago.
+# APRIL 26 - *NEW STRUCTURE*
+1. Transaction Class:
+
+This class would hold the properties and functionalities related to a single transaction.
+
+    Properties:
+        - date (String)
+        - time (String)
+        - description (String)
+        - vendor (String)
+        - amount (double)
+    Methods:
+        + Constructor to initialize the properties
+        + display() - This method would format and print the transaction details
+
+2. TransactionList Class:
+
+This class would manage a list of transactions and provide methods to add, remove, search, and filter transactions.
+
+    Properties:
+        + transactions (ArrayList<Transaction>) - A list to store Transaction objects
+
+    Methods:
+        // SCRUM Methods -- these just utilize ArrayList.add/.get/.remove etc
+        + addTransaction(Transaction transaction) - Adds a transaction to the list
+        + getTransaction(int index) - Returns the transaction at a specific index
+        + removeTransaction(int index) - Removes the transaction at a specific index
+        + filterTransactions(criteria) - This method would filter transactions based on different criteria (date, vendor, amount, etc.)
+        + displayAll() - This method would call the TransactionList class method to display all transactions.
+        + displayDeposits() - Similar to displayAll but for Deposits
+        + displayDebits() - Similar to displayAll but for Debits
+
+3. UserInterface Class:
+
+This class would handle user interactions and display the application screens.
+
+    Properties:
+        - scanner (Scanner) - Scanner object to read user input
+    Methods:
+        + getHomeScreen() - This method would display the home screen with options for adding deposits, making payments, showing the ledger, and exiting.
+        + setTransactionInfo(String transactionType) - This method would handle user input for transaction details (description, vendor, amount) based on the transaction type (deposit or payment).
+        + getLedger() - This method would display the ledger screen with options for showing all transactions, deposits, payments, reports, and going back to the home screen.
+        + getReports() - This method would display the reports screen with options for month-to-date, last month, year-to-date, last year, search by vendor, custom search, and going back to the ledger screen.
+        - display(int i) - This method would call the TransactionList class method to display certain or all transactions.
+
+4. Reports Class:
+
+This class would handle generating different reports based on transaction data.
+
+    Methods:
+        monthToDate(LocalDateTime today) - This method would calculate the total amount for transactions from the beginning of the month to the current date. (similar methods for 
+        lastMonth(LocalDateTime today) - This method caluclate the total amount for transactions in the previous month.
+        yearToDate(LocalDateTime today) - Similar to monthToDate but for the year
+        lastYear(LocalDateTime today) - Similar to lastMonth but for the year
+        searchByVendor(String vendor) - This method would use the TransactionList class method to filter transactions by vendor and then display them.
+        customSearch(criteria) - This method would use the TransactionList class method to filter transactions based on various criteria provided by the user and then display them.
+
+5. Main Class:
+
+This class would call the filler method in TransactionList to fill the TransactionList if Log exists. Will create a new file and directory if not found. 
+It would then start the program by entering the first UserInterface Screen.
+
+---
+### Concerning Logic
+#### 1. Most of the MTD, YTD, lastMonth, lastYear methods have similar logic
+
+A lot of this logic was stuff I had to look up in documentation.
+```java
+    public static double monthToDate(LocalDateTime today) {
+        return transactions.stream()
+                .filter(transaction -> transaction.getDate().getYear() == today.getYear())
+                .filter(transaction -> transaction.getDate().getMonthValue() == today.getMonthValue())
+                .filter(transaction -> transaction.getDate().getDayOfMonth() <= today.getDayOfMonth())
+                .mapToDouble(Transaction::getAmount)
+                .sum();
+    }
+```
+`.filter`
+> was used along with a lambda function to only show transactions in the stream the are true for the logic
+> 
+>[More Info](https://www.geeksforgeeks.org/stream-filter-java-examples/)
+
+`.mapToDouble`
+> was to return each `transaction.getAmount()`'s double value
+>
+>[More Info](https://www.geeksforgeeks.org/stream-maptodouble-java-examples/)
+
+`the double colo operator ::`
+> I found out this was just a shorthand way to return simple functions...
+> 
+> SHORTER THAN lambda which a was wild to me (IntelliJ introduced it to me and it started making sense)
+> 
+`.sum()`
+> was used to add all the Doubles mapped from mapToDouble
+> 
+> [More Info](https://www.geeksforgeeks.org/sum-list-stream-filter-java/)
+
+So in conclusion... for this `monthToDate(LocalDateTime today)` method, I stream the information coming
+from the transactions ArrayList object. I then filter to see only those in the current year. I filter to see only the transactions
+made in the same month as today. I filter to see only transactions before and on today. I then return all the amounts in the list
+as a double, and add them all together! This is all returned from the function.
+
+#### 2. Filtering Vendor and Optional Filtering
+
+**_Filtering Vendor_**
+```java
+    public static void searchVendor(String input) {
+        transactions.stream()
+                .filter(transaction -> transaction.getVendor().equalsIgnoreCase(input))
+                .sorted()
+                .forEach(Transaction::display);
+    }
+```
+This literally just takes the input and checks to see if any of the transactions in the stream have the same vendor as 
+input. It then sorts the stream and displays the filtered transactions.
+
+**_Advanced Filtering_**
+```java
+    public static void filterTransactions(String start , String end, String description, String vendor, String amount) {
+        // Collect filtered transactions based on user input
+        ArrayList<Transaction> filteredTransactions = new ArrayList<>();
+    
+        transactions.stream()
+                .filter(transaction -> (start.isEmpty() || transaction.getDate().isAfter(LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).minusDays(1))))
+                .filter(transaction -> (end.isEmpty() || transaction.getDate().isBefore(LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).plusDays(1))))
+                .filter(transaction -> (description.isEmpty() || transaction.getDescription().equalsIgnoreCase(description)))
+                .filter(transaction -> (vendor.isEmpty() || transaction.getVendor().equalsIgnoreCase(vendor)))
+                .filter(transaction -> (amount.isEmpty() || transaction.getAmount() == Double.parseDouble(amount)))
+                .forEach(filteredTransactions::add);
+    
+        if (filteredTransactions.isEmpty()) {
+            System.out.println("No Available transactions");
+        } else {
+            System.out.println("Filtered Transactions:");
+            filteredTransactions.stream().sorted().forEach(Transaction::display);
+        }
+    }
+```
+With the stream, I am using the `||` operator within the `.filter` portion. This basically lets us know to filter
+if value for criteria is found or it just returns true for filter showing all transactions for the value asked. Then it 
+the `.forEach` method to implement `filteredTransactions.add(current object in stream)`. If the new filtered ArrayList is
+empty, we show that there are no available transactions. otherwise we display every transaction in `filteredTransactions`
+in sorted order.
