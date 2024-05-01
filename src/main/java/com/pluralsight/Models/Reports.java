@@ -1,11 +1,6 @@
 package com.pluralsight.Models;
 
 import java.time.LocalDateTime;
-/*import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
-import static com.pluralsight.Models.TransactionList.filterTransactions;
-import static com.pluralsight.Models.TransactionList.transactions;*/
 
 public class Reports {
     private final TransactionList transactions;

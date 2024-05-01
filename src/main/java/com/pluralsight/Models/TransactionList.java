@@ -13,15 +13,14 @@ public class TransactionList {
     }
     // Fill Transactions if Transaction.cvs exists and has data --> This should go in a different helper class!
     // If doesn't exist make the directory
-
     public Stream<Transaction> stream() {
         return transactions.stream();
     }
-    // CRUD METHODS ***NOTE NOT ALL OF THESE WILL BE USED***
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
     }
-    public Transaction getTransaction(int index) {
+    // UNUSED CODE  --> commented out
+    /*public Transaction getTransaction(int index) {
         if (index >= 0 && index < transactions.size()) {
             return transactions.get(index);
         } else {
@@ -37,8 +36,7 @@ public class TransactionList {
     }
     public int getSize() {
         return transactions.size();
-    }
-
+    }*/
     public void filterTransactions(String start , String end, String description, String vendor, String amount) {
     // Collect filtered transactions based on user input
         ArrayList<Transaction> filteredTransactions = new ArrayList<>();

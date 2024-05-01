@@ -18,42 +18,43 @@ public class Transaction {
         this.amount = amount;
     }
 
+    // Getters
     public String getCurrentDate() {
         return currentDate;
     }
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
-    }
-
     public String getCurrentTime() {
         return currentTime;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public String getVendor() {
+        return vendor;
+    }
+    public double getAmount() {
+        return amount;
+    }
+
+    // Setters --> UNUSED --> COMMENTED OUT
+    /*
+    public void setCurrentDate(String currentDate) {
+        this.currentDate = currentDate;
     }
     public void setCurrentTime(String currentTime) {
         this.currentTime = currentTime;
     }
-
-    public String getDescription() {
-        return description;
-    }
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getVendor() {
-        return vendor;
     }
     public void setVendor(String vendor) {
         this.vendor = vendor;
     }
-
-    public double getAmount() {
-        return amount;
-    }
     public void setAmount(double amount) {
         this.amount = amount;
     }
+    */
 
-
+    // Methods
     public void display() {
         String output = String.format("\t%-10s\t%-10s\t%-30s\t%-20s\t$\t%8.2f",
                 currentDate,currentTime, description, vendor, amount);
