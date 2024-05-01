@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    private String currentDate;
-    private String currentTime;
-    private String description;
-    private String vendor;
-    private double amount;
+    private final String currentDate;
+    private final String currentTime;
+    private final String description;
+    private final String vendor;
+    private final double amount;
 
     public Transaction(String currentDate, String currentTime, String description, String vendor, double amount) {
         this.currentDate = currentDate;
@@ -34,26 +34,7 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
-
-    // Setters --> UNUSED --> COMMENTED OUT
-    /*
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
-    }
-    public void setCurrentTime(String currentTime) {
-        this.currentTime = currentTime;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public void setVendor(String vendor) {
-        this.vendor = vendor;
-    }
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-    */
-
+    // Setters --> UNUSED --> Deleted
     // Methods
     public void display() {
         String output = String.format("\t%-10s\t%-10s\t%-30s\t%-20s\t$\t%8.2f",

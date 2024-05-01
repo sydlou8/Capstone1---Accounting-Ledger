@@ -19,24 +19,6 @@ public class TransactionList {
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
     }
-    // UNUSED CODE  --> commented out
-    /*public Transaction getTransaction(int index) {
-        if (index >= 0 && index < transactions.size()) {
-            return transactions.get(index);
-        } else {
-            throw new IndexOutOfBoundsException("Invalid transaction index");
-        }
-    }
-    public void removeTransaction(int index) {
-        if (index >= 0 && index < transactions.size()) {
-            transactions.remove(index);
-        } else {
-            throw new IndexOutOfBoundsException("Invalid transaction index");
-        }
-    }
-    public int getSize() {
-        return transactions.size();
-    }*/
     public void filterTransactions(String start , String end, String description, String vendor, String amount) {
     // Collect filtered transactions based on user input
         ArrayList<Transaction> filteredTransactions = new ArrayList<>();
