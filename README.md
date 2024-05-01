@@ -12,11 +12,11 @@ I am going to be creating a bunch of constructors, and edit the code so that it 
 instead of directly using the class.
 --NEW Gregor introduced a mini INTRO to MVC architecture demo! I will be using this to my advantage and try to implement it. 
 Also will be working on USER INTERFACE (remember use %-20s)
-![UML Diagram](files/UML.png)
 
 ---
 
 # April 29
+![UML Diagram](files/UML.png)
 ## Main Class
 ### Screens
 > **Home Screen:**
