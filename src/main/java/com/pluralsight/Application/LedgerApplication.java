@@ -19,9 +19,9 @@ public class LedgerApplication {
 
             UserInterface ui = new UserInterface(scanner, transactionList, lgoHandler);
 
-            int choice = ui.getHomeScreen();
-            scanner.close();
-            System.exit(0);
+            System.exit(ui.getHomeScreen());
+            //scanner.close();
+            //System.exit(0);
         }
     }
 }

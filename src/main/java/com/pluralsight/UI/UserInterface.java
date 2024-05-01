@@ -33,7 +33,6 @@ public class UserInterface {
             System.out.println("\t[X] - Exit");
             System.out.print("Your Selection: ");
             selection = userInput.nextLine().strip().toUpperCase();
-
             switch (selection) {
                 case "D":
                     System.out.println("=".repeat(100));
@@ -53,12 +52,11 @@ public class UserInterface {
                     System.out.println("Thank you. Goodbye.");
                     System.out.println("-".repeat(100));
                     return 0;
-                //System.exit(0);
                 default:
                     System.out.println("Please enter a proper selection: ");
             }
-        }
 
+        }
     }
     private void setTransactionInfo(String transactionType) {
         System.out.printf(" ".repeat(45)+"%s screen\n".toUpperCase(), transactionType);
@@ -96,8 +94,7 @@ public class UserInterface {
             String selection = userInput.nextLine().strip().toUpperCase();
             switch (selection) {
                 case "Y":
-                    getHomeScreen();
-                    break;
+                    return;
                 case "N":
                     System.out.println("-".repeat(60));
                     System.out.println("Thank you. Goodbye.");
@@ -141,8 +138,7 @@ public class UserInterface {
                     getReports();
                     break;
                 case "H":
-                    getHomeScreen();
-                    break;
+                    return;
                 default:
                     System.out.println("Please enter a proper response: ");
             }
@@ -208,8 +204,7 @@ public class UserInterface {
                         reports.customSearch(start, end, description, vendor, amount);
                         break;
                     case 0:
-                        getLedger();
-                        break;
+                        return;
                     default:
                         System.out.print("Please enter a proper selection: ");
                 }
@@ -219,13 +214,4 @@ public class UserInterface {
         }
     }
 
-    private void handleAddDeposit() {
-        System.out.println("=".repeat(60));
-        setTransactionInfo("Deposit");
-    }
-
-    private void handleMakePayment() {
-        System.out.println("=".repeat(60));
-        setTransactionInfo("Payment");
-    }
 }

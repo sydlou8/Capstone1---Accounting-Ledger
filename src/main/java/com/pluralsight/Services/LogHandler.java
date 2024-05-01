@@ -12,7 +12,7 @@ public class LogHandler {
         this.transactions = transactions;
     }
     public void listFiller() {
-        final String LOG_DIRECTORY= "logs";
+        final String LOG_DIRECTORY= "logs2";
         File directory = new File(LOG_DIRECTORY);
         if(!directory.exists()) {
             directory.mkdir();
@@ -34,7 +34,7 @@ public class LogHandler {
     }
     // Log Transactions into transactions log
     public void logger(Transaction transaction) {
-        File file = new File("logs/transaction.csv");
+        File file = new File("logs2/transaction.csv");
         try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
             writer.printf("%s|%s|%s|%s|%4.2f\n",
                     transaction.getCurrentDate(),
