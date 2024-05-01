@@ -1,8 +1,6 @@
-package com.pluralsight;
+package com.pluralsight.Models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaction {
@@ -23,7 +21,6 @@ public class Transaction {
     public String getCurrentDate() {
         return currentDate;
     }
-
     public void setCurrentDate(String currentDate) {
         this.currentDate = currentDate;
     }
@@ -31,7 +28,6 @@ public class Transaction {
     public String getCurrentTime() {
         return currentTime;
     }
-
     public void setCurrentTime(String currentTime) {
         this.currentTime = currentTime;
     }
@@ -39,7 +35,6 @@ public class Transaction {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -47,7 +42,6 @@ public class Transaction {
     public String getVendor() {
         return vendor;
     }
-
     public void setVendor(String vendor) {
         this.vendor = vendor;
     }
@@ -55,20 +49,25 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
-
     public void setAmount(double amount) {
         this.amount = amount;
     }
 
 
     public void display() {
-        String output = String.format("%s\t%s\t%s\t%s\t$%4.2f",
+        String output = String.format("\t%-10s\t%-10s\t%-30s\t%-20s\t$\t%8.2f",
                 currentDate,currentTime, description, vendor, amount);
         System.out.println(output);
     }
-    public LocalDateTime getDate() {
+    public LocalDateTime getDateTime() {
         String currentDateTime = String.format("%s %s", currentDate, currentTime);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return LocalDateTime.parse(currentDateTime, formatter);
+    }
+    public boolean isDeposit() {
+        return amount > 0;
+    }
+    public boolean isPayment() {
+        return amount < 0;
     }
 }

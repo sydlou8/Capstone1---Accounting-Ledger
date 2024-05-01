@@ -1,16 +1,22 @@
 # Capstone 1 - Accounting Ledger 
-# LOG
-##### [April 25:](#april-25-1)
+# LOG ()
+##### [April 29: (click as link)](#april-29)
 I am currently coding this project in a very basic way. The project feels very clunky at the moment.
 After figuring out all my main code, I plan on updating my code to be more organized. I want to challenge myself
 using an MVC architecture -- which Gregor vaguely introduced a while ago.
-##### [April 26:](#april-26---new-structure)
+##### [April 30: (click as link)](#april-30---new-structure)
 I wasn't able to do a MVC architecture, but I was able to organize everything in a new way
+##### [May 1: (click as link)](#may-1)
+Today I am working on the organization of my capstone classes again. I plan on updating methods to be properly public and private.
+I am going to be creating a bunch of constructors, and edit the code so that it is using an instance of the class
+instead of directly using the class.
+--NEW Gregor introduced a mini INTRO to MVC architecture demo! I will be using this to my advantage and try to implement it. 
+Also will be working on USER INTERFACE (remember use %-20s)
 ![UML Diagram](files/UML.png)
 
 ---
 
-# April 25
+# April 29
 ## Main Class
 ### Screens
 > **Home Screen:**
@@ -104,7 +110,7 @@ especially when filtering.
 ```
 ---
 
-# APRIL 26 - *NEW STRUCTURE*
+# APRIL 30 - *NEW STRUCTURE*
 1. Transaction Class:
 
 This class would hold the properties and functionalities related to a single transaction.
@@ -213,12 +219,11 @@ as a double, and add them all together! This is all returned from the function.
     public static void searchVendor(String input) {
         transactions.stream()
                 .filter(transaction -> transaction.getVendor().equalsIgnoreCase(input))
-                .sorted()
                 .forEach(Transaction::display);
     }
 ```
 This literally just takes the input and checks to see if any of the transactions in the stream have the same vendor as 
-input. It then sorts the stream and displays the filtered transactions.
+input. It then displays the filtered transactions.
 
 **_Advanced Filtering_**
 ```java
@@ -238,12 +243,15 @@ input. It then sorts the stream and displays the filtered transactions.
             System.out.println("No Available transactions");
         } else {
             System.out.println("Filtered Transactions:");
-            filteredTransactions.stream().sorted().forEach(Transaction::display);
+            filteredTransactions.stream().forEach(Transaction::display);
         }
     }
 ```
 With the stream, I am using the `||` operator within the `.filter` portion. This basically lets us know to filter
 if value for criteria is found or it just returns true for filter showing all transactions for the value asked. Then it 
 the `.forEach` method to implement `filteredTransactions.add(current object in stream)`. If the new filtered ArrayList is
-empty, we show that there are no available transactions. otherwise we display every transaction in `filteredTransactions`
-in sorted order.
+empty, we show that there are no available transactions. otherwise we display every transaction in `filteredTransactions`.
+# May 1
+Okay, I was able to change everything to what I wanted! I was able to get a beginner's grasp of MVC. 
+I did my best to implement it!
+![New UML](files/UML2.png)
