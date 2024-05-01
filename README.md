@@ -1,5 +1,5 @@
 # Capstone 1 - Accounting Ledger 
-# LOG ()
+# LOG
 ##### [April 29: (click as link)](#april-29)
 I am currently coding this project in a very basic way. The project feels very clunky at the moment.
 After figuring out all my main code, I plan on updating my code to be more organized. I want to challenge myself
