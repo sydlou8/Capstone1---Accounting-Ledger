@@ -197,7 +197,7 @@ A lot of this logic was stuff I had to look up in documentation.
 >
 >[More Info](https://www.geeksforgeeks.org/stream-maptodouble-java-examples/)
 
-`the double colo operator ::`
+`the double colon operator ::`
 > I found out this was just a shorthand way to return simple functions...
 > 
 > SHORTER THAN lambda which a was wild to me (IntelliJ introduced it to me and it started making sense)

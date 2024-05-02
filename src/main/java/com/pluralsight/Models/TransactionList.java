@@ -18,7 +18,6 @@ public class TransactionList {
         transactions.add(transaction);
     }
     public void filterTransactions(String start , String end, String description, String vendor, String amount) {
-    // Collect filtered transactions based on user input
         ArrayList<Transaction> filteredTransactions = new ArrayList<>();
 
         transactions.stream()

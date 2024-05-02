@@ -45,8 +45,8 @@ public class Transaction {
                 YELLOW + "\t%-30s" + RESET +
                 CYAN + "\t%-20s\t" + RESET,
                 currentDate,currentTime, description, vendor);
-        String colorOutput = amount > 0 ? String.format(GREEN + "$\t%8.2f" + RESET, amount) : String.format(RED + "$\t%8.2f" + RESET, amount);
-        System.out.println(output+colorOutput);
+        String amountOutput = amount > 0 ? String.format(GREEN + "$\t%8.2f" + RESET, amount) : String.format(RED + "$\t%8.2f" + RESET, amount);
+        System.out.println(output+ amountOutput);
     }
     public LocalDateTime getDateTime() {
         String currentDateTime = String.format("%s %s", currentDate, currentTime);

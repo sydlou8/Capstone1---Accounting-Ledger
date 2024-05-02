@@ -6,7 +6,7 @@ import com.pluralsight.UI.UserInterface;
 
 import java.util.Scanner;
 
-public class LedgerApplication {
+public class AccountingLedger {
 
     public static void run() {
         while(true) {
