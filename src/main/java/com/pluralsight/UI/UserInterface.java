@@ -170,19 +170,39 @@ public class UserInterface {
                 switch(selection) {
                     case 1:
                         System.out.println("-".repeat(100));
-                        System.out.printf("MTD: $%5.2f\n", reports.monthToDate(today));
+                        double mtd = reports.monthToDate(today);
+                        if (mtd > 0) {
+                            System.out.printf(GREEN + "MTD: $\t %5.2f\n" + RESET, mtd);
+                        } else {
+                            System.out.printf(RED + "MTD: $\t %5.2f\n" + RESET, mtd);
+                        }
                         break;
                     case 2:
                         System.out.println("-".repeat(100));
-                        System.out.printf("Last Month: $%5.2f\n", reports.lastMonth(today));
+                        double prevMonth = reports.lastMonth(today);
+                        if (prevMonth > 0) {
+                            System.out.printf(GREEN + "Last Month: $\t %5.2f\n" + RESET, prevMonth);
+                        } else {
+                            System.out.printf(RED + "Last Month: $\t %5.2f\n" + RESET, prevMonth);
+                        }
                         break;
                     case 3:
                         System.out.println("-".repeat(100));
-                        System.out.printf("YTD: $%5.2f\n", reports.yearToDate(today));
+                        double ytd = reports.yearToDate(today);
+                        if (ytd > 0) {
+                            System.out.printf(GREEN + "YTD: $\t %5.2f\n" + RESET, ytd);
+                        } else {
+                            System.out.printf(RED + "YTD: $\t %5.2f\n" + RESET, ytd);
+                        }
                         break;
                     case 4:
                         System.out.println("-".repeat(100));
-                        System.out.printf("YTD: $%5.2f\n", reports.lastYear(today));
+                        double prevYear = reports.lastYear(today);
+                        if (prevYear > 0) {
+                            System.out.printf(GREEN + "Last Year: $\t %5.2f\n" + RESET, prevYear);
+                        } else {
+                            System.out.printf(RED + "Last Year: $\t %5.2f\n" + RESET, prevYear);
+                        }
                         break;
                     case 5:
                         System.out.println("-".repeat(100));
