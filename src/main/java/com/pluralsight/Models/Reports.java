@@ -52,6 +52,14 @@ public class Reports {
         final String SOD = " 00:00:00";
         final String EOD = " 23:59:59";
         System.out.println("-".repeat(100));
-        transactions.filterTransactions(start+SOD, end+EOD, description,vendor,amount);
+        if(start.isEmpty() && end.isEmpty()){
+            transactions.filterTransactions(start, end, description,vendor,amount);
+        } else if (start.isEmpty()) {
+            transactions.filterTransactions(start, end+EOD, description,vendor,amount);
+        } else if (end.isEmpty()) {
+            transactions.filterTransactions(start+SOD, end, description,vendor,amount);
+        } else {
+            transactions.filterTransactions(start+SOD, end+EOD, description,vendor,amount);
+        }
     }
 }
