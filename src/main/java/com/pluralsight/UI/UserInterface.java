@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import static com.pluralsight.UI.UIColors.*;
+
 public class UserInterface {
     private final Scanner userInput ;
     private final TransactionList transactions;
@@ -22,9 +24,9 @@ public class UserInterface {
     public int getHomeScreen (){
         String selection;
         while(true) {
-            System.out.println("=".repeat(100));
+            System.out.println(CYAN + "=".repeat(100));
             System.out.println(" ".repeat(45) + "HOME SCREEN");
-            System.out.println("=".repeat(100));
+            System.out.println("=".repeat(100) + RESET);
             System.out.println("Please make a selection: ");
 
             System.out.println("\t[D] - Add Deposit");
@@ -35,14 +37,12 @@ public class UserInterface {
             selection = userInput.nextLine().strip().toUpperCase();
             switch (selection) {
                 case "D":
-                    System.out.println("=".repeat(100));
+                    System.out.println(GREEN + "=".repeat(100));
                     setTransactionInfo("Deposit");
-                    System.out.println("=".repeat(100));
                     break;
                 case "P":
-                    System.out.println("=".repeat(100));
+                    System.out.println(RED + "=".repeat(100));
                     setTransactionInfo("Debit");
-                    System.out.println("=".repeat(100));
                     break;
                 case "L":
                     getLedger();
@@ -60,7 +60,7 @@ public class UserInterface {
     }
     private void setTransactionInfo(String transactionType) {
         System.out.printf(" ".repeat(45)+"%s screen\n".toUpperCase(), transactionType);
-        System.out.println("=".repeat(100));
+        System.out.println("=".repeat(100) + RESET);
         System.out.printf("Please enter %s information:\n", transactionType);
         System.out.println("-".repeat(100));
         LocalDateTime current = LocalDateTime.now();
@@ -71,10 +71,13 @@ public class UserInterface {
         String description = userInput.nextLine().strip();
         System.out.printf("Enter %s VENDOR: ", transactionType);
         String vendor = userInput.nextLine().strip();
-        System.out.printf("Enter %s AMOUNT: ", transactionType);
-        double amount = userInput.nextDouble();
-        //userInput.nextLine();
-        //= userInput.nextLine().strip();
+        String transactionAmount = transactionType.equalsIgnoreCase("Debit") ?
+                String.format("Enter %s AMOUNT: $\t-", transactionType) :
+                String.format("Enter %s AMOUNT: $\t ", transactionType);
+        System.out.print(transactionAmount);
+        double amount = transactionType.equalsIgnoreCase("Debit") ?
+                userInput.nextDouble() * -1 : userInput.nextDouble();
+
         Transaction transaction = new Transaction(
                 dateFormatter.format(current),
                 timeFormatter.format(current),
@@ -83,7 +86,7 @@ public class UserInterface {
                 amount);
         transactions.addTransaction(transaction);
         logHandler.logger(transaction);
-        System.out.println("-".repeat(60));
+        System.out.println("-".repeat(100));
         System.out.println("Input another transaction: ");
 
         System.out.println("\t[Y] - Yes - Back to Home Screen");
@@ -96,9 +99,9 @@ public class UserInterface {
                 case "Y":
                     return;
                 case "N":
-                    System.out.println("-".repeat(60));
+                    System.out.println("-".repeat(100));
                     System.out.println("Thank you. Goodbye.");
-                    System.out.println("-".repeat(60));
+                    System.out.println("-".repeat(100));
                     System.exit(0);
                 default:
                     System.out.print("Please enter a proper selection: ");
@@ -108,9 +111,9 @@ public class UserInterface {
     private void getLedger() {
         String selection;
         while(true) {
-            System.out.println("=".repeat(100));
+            System.out.println(PURPLE + "=".repeat(100));
             System.out.println(" ".repeat(44) + "LEDGER SCREEN" );
-            System.out.println("=".repeat(100));
+            System.out.println("=".repeat(100) + RESET);
             System.out.println("Please make a selection: ");
 
             System.out.println("\t[A] - Show All Transactions");
@@ -148,9 +151,9 @@ public class UserInterface {
         int selection;
         while(true) {
             LocalDateTime today = LocalDateTime.now();
-            System.out.println("=".repeat(100));
+            System.out.println(YELLOW + "=".repeat(100));
             System.out.println(" ".repeat(44) + "REPORTS SCREEN" );
-            System.out.println("=".repeat(100));
+            System.out.println("=".repeat(100) + RESET);
             System.out.println("Please make a selection: ");
 
             System.out.println("\t[1] - Month To Date");

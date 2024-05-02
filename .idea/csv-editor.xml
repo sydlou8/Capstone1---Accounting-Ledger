@@ -10,13 +10,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/logs2/transaction.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="|" />
-            </Attribute>
-          </value>
-        </entry>
       </map>
     </option>
   </component>

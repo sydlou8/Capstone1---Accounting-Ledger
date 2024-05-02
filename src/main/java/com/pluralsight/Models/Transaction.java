@@ -3,6 +3,8 @@ package com.pluralsight.Models;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static com.pluralsight.UI.UIColors.*;
+
 public class Transaction {
     private final String currentDate;
     private final String currentTime;
@@ -37,9 +39,14 @@ public class Transaction {
     // Setters --> UNUSED --> Deleted
     // Methods
     public void display() {
-        String output = String.format("\t%-10s\t%-10s\t%-30s\t%-20s\t$\t%8.2f",
-                currentDate,currentTime, description, vendor, amount);
-        System.out.println(output);
+        String output = String.format(
+                PURPLE +"\t%-10s" + RESET +
+                BLUE + "\t%-10s" + RESET +
+                YELLOW + "\t%-30s" + RESET +
+                CYAN + "\t%-20s\t" + RESET,
+                currentDate,currentTime, description, vendor);
+        String colorOutput = amount > 0 ? String.format(GREEN + "$\t%8.2f" + RESET, amount) : String.format(RED + "$\t%8.2f" + RESET, amount);
+        System.out.println(output+colorOutput);
     }
     public LocalDateTime getDateTime() {
         String currentDateTime = String.format("%s %s", currentDate, currentTime);

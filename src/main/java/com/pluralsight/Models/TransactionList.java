@@ -11,8 +11,6 @@ public class TransactionList {
     public TransactionList() {
         this.transactions = new ArrayList<>();
     }
-    // Fill Transactions if Transaction.cvs exists and has data --> This should go in a different helper class!
-    // If doesn't exist make the directory
     public Stream<Transaction> stream() {
         return transactions.stream();
     }
