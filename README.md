@@ -188,7 +188,7 @@ if value for criteria is found or it just returns true for filter showing all tr
 the `.forEach` method to implement `filteredTransactions.add(current object in stream)`. If the new filtered ArrayList is
 empty, we show that there are no available transactions. otherwise we display every transaction in `filteredTransactions`.
 
-|![MTD](files/screens/reportsCustomeSearch1.png)  |![MTD](files/screens/reportsCustomeSearch1.png)|
-|------------------------------------------------|----------------------------------------------|
+|![MTD](files/screens/reportsCustomeSearch1.png)  | ![MTD](files/screens/reportsCustomSearch2.png) |
+|------------------------------------------------|------------------------------------------------|
 
 ## Demo
