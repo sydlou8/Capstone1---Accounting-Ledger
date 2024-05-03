@@ -190,5 +190,3 @@ empty, we show that there are no available transactions. otherwise we display ev
 
 |![MTD](files/screens/reportsCustomeSearch1.png)  | ![MTD](files/screens/reportsCustomSearch2.png) |
 |------------------------------------------------|------------------------------------------------|
-
-## Demo
