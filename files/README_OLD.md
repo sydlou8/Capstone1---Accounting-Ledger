@@ -16,7 +16,7 @@ Also will be working on USER INTERFACE (remember use %-20s)
 ---
 
 # April 29
-![UML Diagram](files/UML.png)
+![UML Diagram](UML.png)
 ## Main Class
 ### Screens
 > **Home Screen:**
@@ -255,4 +255,4 @@ empty, we show that there are no available transactions. otherwise we display ev
 # May 1
 Okay, I was able to change everything to what I wanted! I was able to get a beginner's grasp of MVC. 
 I did my best to implement it!
-![New UML](files/UML2.png)
+![New UML](UML2.png)
