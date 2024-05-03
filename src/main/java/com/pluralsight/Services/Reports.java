@@ -1,4 +1,7 @@
-package com.pluralsight.Models;
+package com.pluralsight.Services;
+
+import com.pluralsight.Models.Transaction;
+import com.pluralsight.Models.TransactionList;
 
 import java.time.LocalDateTime;
 

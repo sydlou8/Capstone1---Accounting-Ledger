@@ -29,7 +29,7 @@ G ended up as a happy customer!
 ![UML Diagram](files/UML.png)
 + First UML Diagram once I decided I wanted to separate into different classes.
 
-![Second UML Diagram](files/UML2.png)
+![Second UML Diagram](files/UML-1.png)
 + Second UML Diagram after I wanted to utilize MVC
 
 ### Main Class
@@ -59,11 +59,6 @@ G ended up as a happy customer!
 >    3. display deposits only
 >    4. display all transactions
 
-#### *3. Reports Class*
-> 1. Contains different logic for the reports Screen.
->    1. Adds a bunch of different values in transaction list to get the desired output
->    2. utilizes filtering to handle different methods based on desire
-
 ### UI (Views)
 #### *1. UserInterface Class*
 > 1. Contains all screens for the application. 
@@ -86,6 +81,12 @@ G ended up as a happy customer!
 > 2. Creates new directory if not found, Creates new Transaction.csv if not found
 > 3. If found, fills TransactionList with data in transaction.csv
 > 4. Handles writing a new transaction into file.
+
+#### *2. Reports Class*
+> 1. Contains different logic for the reports Screen.
+>    1. Adds a bunch of different values in transaction list to get the desired output
+> 2. utilizes filtering to handle different methods based on desire
+
 
 ## Code and Logic
 ### Display Logic

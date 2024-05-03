@@ -1,6 +1,6 @@
 package com.pluralsight.UI;
 
-import com.pluralsight.Models.Reports;
+import com.pluralsight.Services.Reports;
 import com.pluralsight.Models.Transaction;
 import com.pluralsight.Models.TransactionList;
 import com.pluralsight.Services.LogHandler;
